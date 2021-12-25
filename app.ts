@@ -1,50 +1,75 @@
-// Funciones Básicas
-function sumar( a, b ){
-  return a + b;
+type Carro = {
+  carroceria: string,
+  modelo: string,
+  antibalas: boolean,
+  pasajeros: number,
+  disparar?: () => void;
 }
 
-const sumarTs = ( a:number, b:number ):number => a + b;
 
-const contar = ( heroes ) => {
-  return heroes.length;
-}
+// Objetos
+const batimovil: Carro = {
+  carroceria: "Negra",
+  modelo: "6x6",
+  antibalas: true,
+  pasajeros:4
+};
 
-const contarTs = ( heroes:string[] ) => heroes.length;
-
-const superHeroes = ["Flash", "Arrow", "Superman", "Linterna Verde"];
-contar(superHeroes);
-
-const superHeroesTs: string[] = ["Flash", "Arrow", "Superman", "Linterna Verde"];
-contarTs(superHeroesTs);
-
-//Parametros por defecto
-/* const llamarBatman = ( llamar ) => {
-  if( llamar ){
-    console.log("Batiseñal activada");
+const bumblebee: Carro= {
+  carroceria: "Amarillo con negro",
+  modelo: "4x2",
+  antibalas: true,
+  pasajeros:4,
+  disparar(){ // El metodo disparar es opcional
+    console.log("Disparando");
   }
-}
- */
-// llamarBatman();
+};
 
-const llamarBatmanTs = ( llamar:boolean = true ): void => {
-  if ( llamar ){
-    console.log("Batiseñal activada");
-  }
-}
-
-llamarBatmanTs();
-
-// Rest?
-const unirheroes = ( ...personas: string[] ): string => {
-  return personas.join(", ");
+// Villanos debe de ser un arreglo de objetos personalizados
+type Villanos = {
+  nombre: string,
+  edad: (number|undefined),
+  mutante: boolean
 }
 
-console.log( unirheroes('Juan Nuñez', 'Alberto Arana', 'Andres Armas') );
+const villanos: Villanos[] = [{
+  nombre:"Lex Luthor",
+  edad: 54,
+  mutante:false
+},{
+  nombre: "Erik Magnus Lehnsherr",
+  edad: 49,
+  mutante: true
+},{
+  nombre: "James Logan",
+  edad: undefined,
+  mutante: true
+}];
 
+// Multiples tipos
+// cree dos tipos, uno para charles y otro para apocalipsis
+type Charles = {
+  poder: string,
+  estatura: number
+}
 
-// Tipo funcion
-const noHaceNada = ( numero:number, texto:string, booleano:boolean, arreglo:string[] ) => {}
+type Apocalipsis = {
+  lider: boolean,
+  miembros: string[]
+}
 
-// Crear el tipo de funcion que acepte la funcion "noHaceNada"
-let noHaceNadaTampoco: (n: number, s: string, b: boolean, a: string[]) => void;
-noHaceNadaTampoco = noHaceNada
+const charles: Charles = {
+  poder:"psiquico",
+  estatura: 1.78
+};
+
+const apocalipsis: Apocalipsis = {
+  lider:true,
+  miembros: ["Magneto","Tormenta","Psylocke","Angel"]
+}
+
+// Mystique, debe poder ser cualquiera de esos dos mutantes (charles o apocalipsis)
+let mystique: ( Charles|Apocalipsis );
+
+mystique = charles;
+mystique = apocalipsis;
